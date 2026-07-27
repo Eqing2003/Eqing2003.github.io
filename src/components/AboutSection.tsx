@@ -19,8 +19,18 @@ export default function AboutSection() {
         <div className="grid md:grid-cols-2 gap-10 items-center">
           <ScrollReveal>
             <div className="relative">
-              <div className="w-64 h-64 mx-auto rounded-3xl bg-gradient-to-br from-brand-purple to-brand-cyan flex items-center justify-center text-7xl shadow-2xl shadow-brand-purple/20">
-                👨‍💻
+              <div className="w-64 h-64 mx-auto rounded-3xl overflow-hidden shadow-2xl shadow-brand-purple/20">
+                <img
+                  src="/images/avatar.jpg"
+                  alt="何亦清"
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = "none";
+                    target.parentElement!.classList.add("bg-gradient-to-br", "from-brand-purple", "to-brand-cyan", "flex", "items-center", "justify-center");
+                    target.parentElement!.innerHTML = '<span class="text-7xl">👨‍💻</span>';
+                  }}
+                />
               </div>
               <div className="absolute -inset-2 rounded-[30px] border-2 border-brand-purple/20 -z-10" />
             </div>
