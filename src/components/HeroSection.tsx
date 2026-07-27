@@ -55,13 +55,13 @@ export default function HeroSection() {
           className="flex gap-4 flex-wrap"
         >
           <a
-            href="#projects"
+            href="/projects"
             className="px-6 py-3 rounded-full font-semibold text-sm bg-gradient-to-r from-brand-purple to-brand-cyan text-white hover:shadow-lg hover:shadow-brand-purple/25 transition-all"
           >
             查看项目
           </a>
           <a
-            href="#contact"
+            href="/contact"
             className="px-6 py-3 rounded-full font-semibold text-sm border border-brand-purple text-brand-purple hover:bg-brand-purple/10 transition-all"
           >
             联系我
