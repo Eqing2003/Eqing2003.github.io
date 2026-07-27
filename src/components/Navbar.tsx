@@ -10,6 +10,7 @@ const links = [
   { href: "#about", label: "关于" },
   { href: "#skills", label: "技能" },
   { href: "#projects", label: "项目" },
+  { href: "/blog", label: "博客", isExternal: true },
   { href: "#contact", label: "联系" },
 ];
 
