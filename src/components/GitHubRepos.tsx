@@ -35,7 +35,7 @@ export default function GitHubRepos() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://api.github.com/users/Eqing2003/repos?per_page=30&sort=updated")
+    fetch("https://api.github.com/users/onfireq/repos?per_page=30&sort=updated")
       .then((r) => r.json())
       .then((data) => {
         setRepos(data.filter((r: Repo) => !r.name.includes("github.io")));
