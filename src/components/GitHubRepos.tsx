@@ -1,0 +1,103 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { FaGithub } from "react-icons/fa";
+import ScrollReveal from "./ScrollReveal";
+
+interface Repo {
+  name: string;
+  description: string;
+  language: string;
+  stargazers_count: number;
+  html_url: string;
+  updated_at: string;
+  topics: string[];
+}
+
+const LANG_COLORS: Record<string, string> = {
+  TypeScript: "#3178c6",
+  JavaScript: "#f1e05a",
+  Python: "#3572A5",
+  Verilog: "#b2b7f8",
+  VHDL: "#adb2cb",
+  HTML: "#e34c26",
+  CSS: "#563d7c",
+  "C++": "#f34b7d",
+  C: "#555555",
+  Go: "#00ADD8",
+  Rust: "#dea584",
+  Java: "#b07219",
+};
+
+export default function GitHubRepos() {
+  const [repos, setRepos] = useState<Repo[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("https://api.github.com/users/onfireq/repos?per_page=30&sort=updated")
+      .then((r) => r.json())
+      .then((data) => {
+        setRepos(data.filter((r: Repo) => !r.name.includes("github.io")));
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="text-center py-12">
+        <div className="inline-block w-6 h-6 border-2 border-brand-purple/30 border-t-brand-purple rounded-full animate-spin" />
+      </div>
+    );
+  }
+
+  if (repos.length === 0) return null;
+
+  return (
+    <div className="space-y-4">
+      {repos.map((repo, i) => {
+        const color = LANG_COLORS[repo.language] || "#999";
+        return (
+          <ScrollReveal key={repo.name} delay={i * 0.08}>
+            <motion.a
+              href={repo.html_url}
+              target="_blank"
+              rel="noopener"
+              whileHover={{ y: -4 }}
+              className="glass p-5 block transition-colors hover:border-brand-purple/30 group"
+            >
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-2">
+                    <FaGithub className="text-gray-400 group-hover:text-white transition" size={18} />
+                    <h4 className="font-semibold text-brand-cyan">{repo.name}</h4>
+                  </div>
+                  <p className="text-sm text-gray-400 mb-3 line-clamp-2">
+                    {repo.description || "暂无描述"}
+                  </p>
+                  <div className="flex items-center gap-4 text-xs text-gray-500">
+                    {repo.language && (
+                      <div className="flex items-center gap-1.5">
+                        <span className="w-2.5 h-2.5 rounded-full" style={{ background: color }} />
+                        {repo.language}
+                      </div>
+                    )}
+                    {repo.stargazers_count > 0 && (
+                      <div className="flex items-center gap-1">
+                        ⭐ {repo.stargazers_count}
+                      </div>
+                    )}
+                    <div>
+                      更新于 {new Date(repo.updated_at).toLocaleDateString("zh-CN")}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.a>
+          </ScrollReveal>
+        );
+      })}
+    </div>
+  );
+}

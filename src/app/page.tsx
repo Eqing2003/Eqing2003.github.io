@@ -1,3 +1,5 @@
+"use client";
+
 import HeroSection from "@/components/HeroSection";
 import Footer from "@/components/Footer";
 
@@ -5,13 +7,13 @@ export default function Home() {
   return (
     <>
       <HeroSection />
-      {/* Quick links */}
+
       <section className="py-24 px-6">
         <div className="max-w-4xl mx-auto grid md:grid-cols-3 gap-6">
           {[
-            { href: "/about", title: "关于我", desc: "偏振控制研究者 × 全栈工程师", icon: "👨‍💻" },
             { href: "/projects", title: "项目经历", desc: "从算法到部署的完整链路", icon: "🚀" },
             { href: "/blog", title: "技术博客", desc: "深度思考与学习记录", icon: "✍️" },
+            { href: "/about", title: "关于我", desc: "偏振控制研究者 × 全栈工程师", icon: "👨‍💻" },
           ].map((item) => (
             <a
               key={item.href}
@@ -25,6 +27,7 @@ export default function Home() {
           ))}
         </div>
       </section>
+
       <Footer />
     </>
   );

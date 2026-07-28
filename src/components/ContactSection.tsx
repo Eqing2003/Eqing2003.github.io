@@ -9,7 +9,7 @@ import SectionHeading from "./SectionHeading";
 const contacts = [
   { icon: HiMail, label: "邮箱", value: "2467708204@qq.com" },
   { icon: FaWeixin, label: "微信", value: "onfireq" },
-  { icon: FaGithub, label: "GitHub", value: "github.com/Eqing2003" },
+  { icon: FaGithub, label: "GitHub", value: "github.com/onfireq" },
   { icon: HiGlobe, label: "所在地", value: "中国 · 广州" },
 ];
 
